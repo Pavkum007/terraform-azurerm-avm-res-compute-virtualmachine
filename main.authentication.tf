@@ -48,7 +48,7 @@ resource "azurerm_key_vault_secret" "admin_password" {
 ####Admin SSH key generation related resources
 #create an ssh key for the admin user in linux
 resource "tls_private_key" "this" {
-  count = ((var.generate_admin_password_or_ssh_key == true) && (lower(var.os_type) == "linux")) ? 1 : 0
+  count = ((var.generate_admin_password_or_ssh_key == true) && (var.disable_password_authentication == false) && (lower(var.os_type) == "linux") ? 1 : 0
 
   algorithm = "RSA"
   rsa_bits  = 4096
